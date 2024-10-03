@@ -1,0 +1,57 @@
+package views
+
+templ Index(user string) {
+	<!DOCTYPE html>
+	<html lang="pt-br">
+		<head>
+			<meta charset="UTF-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+			<link rel="preconnect" href="https://fonts.googleapis.com"/>
+			<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+			<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet"/>
+			<script src="https://unpkg.com/htmx.org@2.0.2"></script>
+			<link rel="stylesheet" href="/views/css/style.css"/>
+			<title>{ user }</title>
+			<script type="text/javascript">
+				const socket = new WebSocket("ws://localhost:8080/ws");
+
+				// Gambiarra para pegar o nome do usuário
+				const username = document.title;
+
+				socket.onmessage = function(event) {
+					const msg = JSON.parse(event.data);
+					const chat = document.getElementById("chat__messages");
+					const messageElement = document.createElement("div");
+					messageElement.classList.add("chat-message");
+					if (msg.user === username) {
+						messageElement.classList.add("self-message");
+						messageElement.innerHTML = `<p class="content-message">${msg.content}</p>`;
+					} else {
+						messageElement.innerHTML = `<p class="user-message">${msg.user}:</p><p class="content-message">${msg.content}</p>`;
+					}
+					chat.appendChild(messageElement);
+				};
+
+				function sendMessage(event) {
+					event.preventDefault();
+					const message = document.getElementById("message").value;
+					socket.send(JSON.stringify({ Content: message, User: username }));
+					document.getElementById("message").value = ""; // Limpa o campo de mensagem
+				}
+			</script>
+		</head>
+		<body>
+			<div class="container">
+				<div class="chat" id="chat__messages">
+					<!-- Aqui as mensagens serão inseridas dinamicamente -->
+				</div>
+				<div class="form">
+					<form onsubmit="sendMessage(event)">
+						<input type="text" name="message" id="message" placeholder="Digite uma mensagem" required/>
+						<button type="submit">Enviar</button>
+					</form>
+				</div>
+			</div>
+		</body>
+	</html>
+}

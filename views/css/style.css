@@ -1,0 +1,113 @@
+* {
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #e0e0ce;
+}
+
+.container {
+    border:  3px solid #000;
+    margin: 48px;
+    padding: 24px;
+    height: 500px;
+    width: 500px;
+    box-shadow: 9px 10px 0px 0px rgba(0,0,0,0.75);
+    background: #F2AF29;
+}
+
+.chat {
+    border: 3px solid #000;
+    background: #ffffff;
+    padding: 8px;
+    margin-bottom: 8px;
+    display: flex;
+    flex-direction: column;
+    height: 80%;
+    overflow-y: scroll;
+}
+
+.chat::-webkit-scrollbar {
+    width: 16px;
+    border: #000 solid 3px;
+}
+
+.chat::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-left: #000 solid 3px;
+}
+
+.chat::-webkit-scrollbar-thumb {
+    background: #888;
+    border-left: #000 solid 3px;
+    border-bottom: #000 solid 3px;
+    border-top: #000 solid 3px;
+    box-sizing: border-box;
+}
+
+.chat::-webkit-scrollbar-thumb:hover {
+    background: #474747;
+}
+
+.chat-message {
+    display: inline-flex;
+    border:  3px solid #000;
+    background: #AD343E;
+    margin-bottom: 8px;
+    padding: 16px;
+    width: fit-content;
+}
+
+.chat-message:first-child {
+    margin-top: auto;
+}
+
+.user-message {
+    margin: 0 8px 0 0;
+    font-weight: bold;
+}
+
+.content-message {
+    margin: 0 0 0 0;
+}
+
+.self-message {
+    margin-left: auto;
+    background: #2E86AB;
+}
+
+.form {
+    margin-top: 16px;
+    display: flex;
+    width: 100%;
+}
+
+.form form {
+    display: flex;
+    flex-direction: row;
+    width: 100%; /* Garante que o formulário ocupe a largura total */
+}
+
+.form input {
+    border: 3px solid #000;
+    padding: 16px;
+    margin-right: 8px;
+    flex-grow: 1;
+    box-sizing: border-box;
+}
+
+.form button {
+    border: 3px solid #000;
+    padding: 16px;
+    background: #000000;
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+    flex-shrink: 0;
+}
